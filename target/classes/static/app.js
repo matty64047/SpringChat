@@ -6,6 +6,7 @@ stompClient.onConnect = (frame) => {
     setConnected(true);
     console.log('Connected: ' + frame);
     stompClient.subscribe('/topic/greetings', (greeting) => {
+        $("#greetings").html("");
         showGreeting(JSON.parse(greeting.body).content);
     });
     stompClient.publish({
@@ -66,4 +67,3 @@ $(function () {
     $( "#disconnect" ).click(() => disconnect());
     $( "#send" ).click(() => sendName());
 });
-

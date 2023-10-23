@@ -76,12 +76,6 @@ public class GreetingController {
         return messages;
 	}
 
-    @SendTo("/topic/greetings")
-    public Greeting send_message(HelloMessage message) throws Exception {
-        System.out.println("Sending message");
-        return new Greeting(HtmlUtils.htmlEscape(message.getName())+": " + HtmlUtils.htmlEscape(message.getMessage()));
-    }
-
     @MessageMapping("/history")
     @SendTo("/topic/greetings")
 	public Greeting history() throws Exception {
@@ -99,7 +93,14 @@ public class GreetingController {
 	@SendTo("/topic/greetings")
 	public Greeting greeting(HelloMessage message) throws Exception {
 		addToDatabase(message.getName(), message.getMessage());
-		return new Greeting(HtmlUtils.htmlEscape(message.getName())+": " + HtmlUtils.htmlEscape(message.getMessage()));
+        List<HelloMessage> messages = retrieveFromDatabase();
+        String returnString = "";
+        if (messages.size() > 0) {
+            for (HelloMessage _message : messages) {
+                returnString += HtmlUtils.htmlEscape(_message.getName())+": " + HtmlUtils.htmlEscape(_message.getMessage()) + "@@";
+            }
+        }  
+        return new Greeting(returnString);
 	}
 
 }
