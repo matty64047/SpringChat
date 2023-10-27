@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <script src="https://kit.fontawesome.com/64542c3b65.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+        enabled. Please enable
+        Javascript and reload this page!</h2></noscript>
+    <div class="icon-bar">
+        <a class="active" href="#"><i class="fa fa-home"></i></a> 
+        <a href="#"><i class="fa fa-search"></i></a> 
+        <a href="/" class="split"><i class="fa-solid fa-right-from-bracket"></i></a> 
+      </div>
+  <div id="leftNav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav('leftNav')">&times;</a>
+    <img src="zulip.png" alt="Logo" style="width:200px;margin-left:auto;margin-right:auto;display:block;">
+    <hr>
+    <a href="#">All Messages</a>
+    <a href="#">Private Messages</a>
+    <a href="#">Mentions</a>
+    <a href="#">Starred Messages</a>
+    <a href="#">Recent Topics</a>
+    <hr>
+    <table id="stream_table" class="table">
+        <thead>
+            <th style="padding-left: 35px;padding-bottom:25px;">Streams</th>
+        </thead>
+        <tbody id="streams">
+
+        </tbody>
+    </table>
+    <a href="#" onclick="addStream()" style="float: bottom;"><i class="fa-solid fa-plus"></i> Add Stream</a>
+      
+  </div>
+  <div id="rightNav" class="right_sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav('rightNav')">&times;</a>
+    <table id="users-table" class="users-table">
+        <thead>
+            <th style="padding-left: 35px;padding-bottom:25px;">Users</th>
+        </thead>
+        <hr>
+        <tbody>
+            <tr><td><div class="row" style="padding:10px;padding-left:50px;display:flex;"><div class="active-icon" style="padding-right:20px">&#128994;</div>m.p.connoll@gmail.com</div></td></tr>
+            <tr><td><div class="row" style="padding:10px;padding-left:50px;display:flex;"><div class="active-icon" style="padding-right:20px">&#128994;</div>matthew.connolly@raytheon.co.uk</div></td></tr>
+            <tr><td><div class="row" style="padding:10px;padding-left:50px;display:flex;"><div class="inactive-icon" style="padding-right:20px">&#128994;</div>matthewc64047@live.co.uk</div></td></tr>
+
+        </tbody>
+    </table>
+
+
+
+  </div>
+        <div class="box">
+        <div class="row header">
+                <span style="font-size:30px;cursor:pointer;float:left;" onclick="openNav('leftNav')" class="streams-button"><i class="fa-solid fa-bars-staggered"></i></span>
+                <span style="font-size:30px;cursor:pointer;float:right;" onclick="openNav('rightNav')"class="users-button"><i class="fa-solid fa-users"></i></span>
+        </div>
+        <div class="row content">
+                <table id="conversation" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Messages</th>
+                    </tr>
+                    </thead>
+                    <tbody id="greetings">
+                    </tbody>
+                </table>
+        </div>
+        <div class="row footer">
+            <div style="padding:20px;align-items:center;float:bottom;display: flex;">
+                    <input class="form-control" type="text" id="message" placeholder="Enter message...">
+                    <button id="send" class="btn btn-default" type="submit">Send</button>
+                </div>
+        </div>
+    </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
